@@ -1,11 +1,24 @@
 abstract class Table {
 
-	public boolean available;
-	public int noOfSeats;
-	public int number;
+	protected boolean available;
+	protected int noOfSeats;
+	protected int number;
+
+	public Table(int number, int noOfSeats) {
+		this.number = number;
+		this.noOfSeats = noOfSeats;
+	}
 
 	public abstract void freeUp();
-	public abstract boolean occupy();
+
+	public boolean occupy() {
+		if (available)
+			available = true;
+		else
+			return false;
+
+		return true;
+	}
 	
 	public boolean isAvailable() {
 		return available;

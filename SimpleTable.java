@@ -1,16 +1,11 @@
 class SimpleTable extends Table {
 
-	public SimpleTable() {
-
+	public SimpleTable(int number, int nrOfSeats) {
+		super(number, nrOfSeats);
 	}
 
 	public void freeUp() {
 
 	}
-
-	public boolean occupy() {
-		return true;
-	}
-
 	
 }

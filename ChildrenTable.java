@@ -1,16 +1,12 @@
 
 public class ChildrenTable extends Table {
 
-	public ChildrenTable(){
-
+	public ChildrenTable(int number, int nrOfSeats) {
+		super(number, nrOfSeats);
 	}
 
 	public void freeUp() {
 
-	}
-
-	public boolean occupy() {
-		return true;
 	}
 
 }

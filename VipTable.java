@@ -1,15 +1,11 @@
 class VipTable extends Table {
 
-	public VipTable(){
-
+	public VipTable(int number, int nrOfSeats){
+		super(number, nrOfSeats);
 	}
 
 	public void freeUp() {
 
 	}
 
-	public boolean occupy() {
-		return true;
-	}
-	
 }
