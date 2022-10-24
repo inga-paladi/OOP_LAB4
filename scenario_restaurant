@@ -19,4 +19,10 @@ Thread:
   La fiecare 10 secunde va recalcula situatia in restaurant:
     - El va alege aleatoriu un numar in intervalul [nrLocuri - nrLocuri * 0.1; nrLocuri + nrLocuri * 0.1]
         pentru a actualiza numarul de mese ocupate.
-    - Se va alege aleatoriu un produs din menu care isi va schimba starea de disponibilitate. 
+    - Se va alege aleatoriu un produs din menu care isi va schimba starea de disponibilitate.
+    
+OOP Requirements:
+
+Overriding
+Abstraction
+Dependency injection

@@ -46,6 +46,8 @@ class ItalianRestaurant extends Restaurant  {
 
 		++nrOfTables;
 		tables.add(new ChildrenTable(nrOfTables, 4));
+
+		super.nrOfFreeTables = nrOfTables;
 	}
 
 	public void operate() {	}

@@ -26,4 +26,8 @@ public class Menu {
 	{
 		dishes.add(dish);
 	}
+
+	ArrayList<Dish> getDishes() {
+		return dishes;
+	}
 }

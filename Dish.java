@@ -1,4 +1,5 @@
 public class Dish {
+    public int ID;
     public String Name;
     public float Price;
     public int AvgPrepTime;

@@ -7,6 +7,7 @@ abstract class Table {
 	public Table(int number, int noOfSeats) {
 		this.number = number;
 		this.noOfSeats = noOfSeats;
+		this.available = true;
 	}
 
 	public abstract void freeUp();

@@ -1,4 +1,5 @@
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class RestaurantApp {
 
@@ -26,24 +27,22 @@ public class RestaurantApp {
 		System.out.println("2. Italian");
 		System.out.println("OtherValue: Quit");
 		
-		int chosenValue;
-		try{
-			System.out.print(">> ");
-			chosenValue = System.in.read() - 48;
-		}
-		catch (IOException e){
-            System.out.println("Error reading from user");
-			System.out.println(e.toString());
-			chosenValue = 99;
-        }
-
-
-		if (chosenValue == 1) {
-			m_restaurant = new FrenchRestaurant();
-		} else if (chosenValue == 2) {
-			m_restaurant = new ItalianRestaurant();
-		} else {
-			return false;
+		System.out.print(">> ");
+		int chosenValue = readInt();
+		
+		switch (chosenValue) {
+			case 1: {
+				m_restaurant = new FrenchRestaurant();
+				break;
+			}
+			case 2: {
+				m_restaurant = new ItalianRestaurant();
+				break;	
+			}
+			default: {
+				System.out.println("Unknown value");
+				return false;
+			}
 		}
 
 		return true;
@@ -57,25 +56,21 @@ public class RestaurantApp {
 
 		int nrOfTotalTables = m_restaurant.getNrOfTables();
 		
-		int chosenTable;
-		try {
-			System.out.print("Chose a table (nr of tables is " + nrOfTotalTables + ")\n>> ");
-			chosenTable = System.in.read();
+		System.out.print("Chose a table (nr of tables is " + nrOfTotalTables + ")\n>> ");
+		int chosenTable = readInt();
+		if (chosenTable > 0 && chosenTable <= nrOfTotalTables) {
 			boolean occupied = m_restaurant.occupyTable(chosenTable);
 			if (occupied) {
 				System.out.println("Table occupied successfully");
+				return true;
 			} else {
 				System.out.println("Table already occupied");
 				return false;
 			}
-		}
-		catch (IOException e){
-            System.out.println("Error reading from user");
-			System.out.println(e.toString());
+		} else {
+			System.out.println("Table does not exist");
 			return false;
         }
-
-		return true;
 	}
 
 	protected boolean callWaiter() {
@@ -88,14 +83,52 @@ public class RestaurantApp {
 		return true;
 	}
 	
-	protected boolean makeOrders() {
+	protected ArrayList<Dish> orderedDishes;
 
+	protected boolean makeOrders() {
+		orderedDishes = new ArrayList<>();
+		ArrayList<Dish> dishes = m_restaurant.getMenu().getDishes();
+
+		while (true) {
+			System.out.print("Select dish >> ");
+			int chosenDishIx = readInt();
+	
+			if (chosenDishIx > 0 && chosenDishIx <= dishes.size()) {
+				orderedDishes.add(dishes.get(chosenDishIx));
+				System.out.println(dishes.get(chosenDishIx).Name + " ordered successfully");
+			} else {
+				System.out.println("No dish found");
+				break;
+			}
+		}
+
+		if (orderedDishes.size() == 0) {
+			return false;
+		}
 		return true;
 	}
 	
 	protected boolean checkOut() {
+		float sumToPay = 0;
 
+		for (Dish dish: orderedDishes) {
+			sumToPay += dish.Price;
+		}
+
+		System.out.print("Price to pay: $");
+		System.out.println(sumToPay);
+		System.out.println("Pay and exit\n");
+		readInt();
 		return true;
+	}
+
+	protected int readInt() {
+		Scanner scanner = new Scanner(System.in);
+		try {
+			return scanner.nextInt();
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 	
 }
